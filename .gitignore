@@ -1,0 +1,65 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor Configs
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Build & Compilation Artifacts
+target/
+**/target/
+build/
+**/build/
+*.class
+*.jar
+*.war
+*.ear
+
+# Node & Frontend Dependencies
+node_modules/
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+dist/
+**/dist/
+dist-ssr/
+*.local
+
+# Database & Runtime Data
+*.db
+*.db.mv.db
+*.db.trace.db
+data/
+**/data/
+docvoice_db*
+uploads/
+**/uploads/
+temp/
+**/temp/
+
+# Environment Variables & Secrets
+.env
+.env*.local
+*.env
+application-secret.yml
+application-local.yml
+
+# Logs
+logs/
+**/logs/
+*.log

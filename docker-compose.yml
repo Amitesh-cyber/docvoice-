@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: docvoice-postgres
+    environment:
+      POSTGRES_USER: docvoice
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: docvoice
+    ports:
+      - "5432:5432"
+    volumes:
+      - docvoice-pgdata:/var/lib/postgresql/data
+
+volumes:
+  docvoice-pgdata:

@@ -1,0 +1,48 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: docvoice
+  config:
+    import: optional:classpath:application-local.yml
+
+  datasource:
+    url: jdbc:h2:file:./data/docvoice_db;AUTO_SERVER=TRUE
+    username: sa
+    password: password
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 198100950578-k3t0qeu9tdomm89aafem7m0h6f31ci2k.apps.googleusercontent.com
+            client-secret: ${GOOGLE_CLIENT_SECRET:placeholder-client-secret}
+            scope: profile, email
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:dGhpcy1pcy1hLXZlcnktc2VjdXJlLWFuZC1sb25nLXNlY3JldC1rZXktZm9yLWRvY3ZvaWNlLWp3dC10b2tlbnM=}
+    expiration: 86400000 # 24 hours in ms
+  ai:
+    gemini-key-1: ${GEMINI_KEY_1:your-gemini-api-key-1}
+    gemini-key-2: ${GEMINI_KEY_2:your-gemini-api-key-2}
+    gemini-base-url: https://generativelanguage.googleapis.com
+    gemini-model: gemini-3.6-flash
+

@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "DocVoice Assistant",
+  "version": "1.0",
+  "permissions": ["activeTab", "contextMenus", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
