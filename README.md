@@ -1,231 +1,221 @@
-# 🎙️ DocVoice — Multilingual Document-to-Speech & AI Knowledge Assistant
+<div align="center">
 
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
-[![React](https://img.shields.io/badge/React-18.x-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![Java](https://img.shields.io/badge/Java-17%2B-orange?logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
-[![Google Gemini](https://img.shields.io/badge/AI-Google%20Gemini-4285F4?logo=google&logoColor=white)](https://ai.google.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+# 🎙️ DocVoice
+### *The Next-Gen Multilingual Document-to-Speech & AI Knowledge Platform*
 
-> **DocVoice** is a modern, full-stack AI platform that transforms static documents (PDF, DOCX, PPT, PPTX) into interactive audio listening experiences and conversational knowledge hubs. Designed for accessibility, multi-tasking learners, and multilingual audiences.
+Transform static documents into interactive audiobooks and conversational AI knowledge hubs.
 
----
+[![Java 17](https://img.shields.io/badge/Java-17%2B-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![React](https://img.shields.io/badge/React-18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Google Gemini](https://img.shields.io/badge/Google_Gemini-3.6/3.8_Flash-8E75C2?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-## 🌟 Key Highlights & Features
+<br/>
 
-- **📑 Multi-Format Document Ingestion**:
-  - High-precision extraction for **PDF** (Apache PDFBox), **PPT / PPTX** (Apache POI with recursive shape & table decomposition), and **DOCX**.
-  - Resilient against corrupted archives, ZIP data descriptors, and nested presentation elements.
-- **🤖 Dual-Model Gemini AI Engine**:
-  - Instant page-by-page and document-level structured summaries.
-  - Contextual **"Ask AI" Q&A** allowing users to query document contents in real time.
-  - Fault-tolerant AI failover: automatic fallback and retry architecture (`gemini-3.6-flash` ⇄ `gemini-3.8-flash`) to ensure 99.9% uptime against traffic surges.
-- **🎧 Multilingual Text-to-Speech (TTS)**:
-  - Natural speech synthesis supporting 50+ languages, including regional Indian languages (Hindi, Tamil, Telugu, Bengali, Marathi, etc.).
-  - Interactive playback controls: speed adjustments, paragraph scrubbing, and synchronized reading highlights.
-- **🔐 Enterprise-Grade Security**:
-  - Stateless authentication with **JWT (JSON Web Tokens)** and **Google OAuth2 SSO**.
-  - Granular CORS policies, encrypted credential handling, and isolated per-user document storage.
-- **⚡ Modern Responsive UI**:
-  - Built with **React 18**, **Vite**, and **Tailwind CSS**.
-  - Document library manager, reader mode, floating audio player bar, and AI chat side-panel.
+[Explore Docs](#-getting-started) • [Report Bug](https://github.com/Amitesh-cyber/docvoice-/issues) • [Request Feature](https://github.com/Amitesh-cyber/docvoice-/issues)
+
+</div>
 
 ---
 
-## 🏗️ System Architecture
+## ⚡ Overview
+
+**DocVoice** bridges the gap between passive reading and auditory learning. Whether you are consuming 100-page academic PDFs, complex financial reports, or classroom PowerPoint slides, DocVoice ingests your files, generates intelligent summaries, and synthesizes studio-grade audio in **50+ global and regional languages** with real-time text tracking.
+
+### 🌟 Key Value Highlights:
+- 📖 **Multimodal Parsing**: Seamless extraction from **PDF**, **DOCX**, and **PPT/PPTX** presentations (including tables, nested shapes, and multi-slide decks).
+- 🧠 **Dual-Core Gemini AI Intelligence**: Instant page-by-page bullet points, document summarization, and interactive **"Ask AI"** Q&A with conversational context.
+- 🗣️ **Multilingual Text-to-Speech (TTS)**: Listen on the go in English, Spanish, French, German, and major Indian languages (Hindi, Tamil, Telugu, Bengali, Marathi, etc.).
+- 🛡️ **Failover Resilience**: Enterprise-grade model fallback architecture (`gemini-3.6-flash` ⇄ `gemini-3.8-flash`) ensuring zero downtime during API traffic surges.
+- 🔒 **Stateless Security**: Spring Security 6, JWT bearer tokens, and Google OAuth2 Social Sign-On.
+
+---
+
+## 🛠️ System Architecture
 
 ```mermaid
-flowchart TD
-    subgraph Client["Frontend (React 18 + Vite)"]
-        UI["Modern UI / Tailwind CSS"]
-        Player["Interactive Audio Player"]
-        Chat["Ask AI Assistant"]
+flowchart TB
+    subgraph Client["Frontend Architecture (React 18 + Vite)"]
+        UI["🎨 Modern Tailwind UI\n(Dashboard, Reader, Library)"]
+        AudioEngine["🎧 HTML5 Audio Controller\n(Speed, Scrubbing, Highlighting)"]
+        ChatEngine["💬 Ask AI Panel\n(Context-Aware Stream)"]
     end
 
-    subgraph Gateway["API & Security Layer"]
-        CORS["CORS & Rate Limiter"]
-        JWT["JWT Auth & Google OAuth2"]
+    subgraph Security["API Gateway & Security"]
+        Filter["🔐 JWT Filter & CORS"]
+        OAuth["🌐 Google OAuth2 Handler"]
     end
 
-    subgraph Backend["Spring Boot Backend Services"]
-        DOC["DocumentProcessingService\n(Apache POI / PDFBox)"]
-        GEMINI["GeminiService\n(Multi-Model Fallback Engine)"]
-        TTS["TTS Audio Service\n(Multilingual Synthesizer)"]
+    subgraph Services["Spring Boot 3.x Backend"]
+        Parser["📄 Document Engine\n(Apache POI & PDFBox)"]
+        AI["🤖 Gemini Service\n(Multi-Model Fallback)"]
+        TTS["🎙️ TTS Voice Synthesizer"]
     end
 
-    subgraph Data["Storage Layer"]
-        DB[(H2 / PostgreSQL DB)]
-        STORAGE[Local / S3 Storage]
+    subgraph Data["Persistence & Storage"]
+        DB[("🗄️ PostgreSQL / H2 Database")]
+        Storage[("📂 Document Storage")]
     end
 
-    subgraph External["External Cloud APIs"]
-        G_AI["Google Gemini API\n(gemini-3.6 / 3.8)"]
-        G_TTS["Google Speech / TTS API"]
+    subgraph Cloud["External AI Cloud Services"]
+        GeminiCloud["☁️ Google AI Studio\n(gemini-3.6-flash / 3.8-flash)"]
+        SpeechCloud["🔊 Google Speech Services"]
     end
 
-    UI -->|HTTP / REST| CORS --> JWT
-    JWT --> DOC
-    JWT --> GEMINI
-    JWT --> TTS
-    DOC --> DB & STORAGE
-    GEMINI --> G_AI
-    TTS --> G_TTS
-    Player <-->|Stream Audio| TTS
-    Chat <-->|Contextual Q&A| GEMINI
+    UI --> Security
+    AudioEngine <--> TTS
+    ChatEngine <--> AI
+
+    Security --> Services
+    Parser --> Storage
+    Parser --> DB
+    AI <--> GeminiCloud
+    TTS <--> SpeechCloud
+    Services --> DB
 ```
 
 ---
 
-## 📁 Repository Structure
+## 💻 Tech Stack & Tooling
 
-```text
-docvoice/
-├── backend/                        # Spring Boot REST API
-│   ├── src/main/java/com/example/demo/
-│   │   ├── controller/             # REST Endpoints (Auth, Documents, Reader, Test)
-│   │   ├── service/                # Core Logic (GeminiService, DocumentProcessingService, TTS)
-│   │   ├── repository/             # Spring Data JPA Repositories
-│   │   ├── model/                  # JPA Entities (User, Document, Page, Summary)
-│   │   └── security/               # JWT Authentication & OAuth2 Configuration
-│   ├── src/main/resources/
-│   │   ├── application.yml         # Application configuration & AI settings
-│   │   └── application-prod.yml    # Production profile
-│   └── pom.xml                     # Maven dependencies
-├── frontend/                       # React 18 + Vite Client
-│   ├── src/
-│   │   ├── components/             # Reusable UI (AudioPlayer, Navbar, ChatDrawer)
-│   │   ├── pages/                  # Views (Dashboard, Reader, Login, Upload)
-│   │   ├── context/                # Auth & Player State Management
-│   │   └── services/               # Axios API client
-│   ├── package.json
-│   └── vite.config.js
-├── .github/workflows/              # CI/CD pipelines
-├── docker-compose.yml              # Local orchestration (Postgres / App)
-├── .gitignore                      # Git exclusion rules
-└── README.md                       # Project documentation
-```
+| Domain | Technology | Description |
+| :--- | :--- | :--- |
+| **Frontend** | React 18, Vite, Tailwind CSS, Lucide Icons | Responsive SPA, instant hot-reloading, modern dark/light UI |
+| **Backend** | Java 17, Spring Boot 3.x, Spring Data JPA | High-throughput REST API with clean layer separation |
+| **Document Processing** | Apache POI 5.x, Apache PDFBox 3.x | Deep extraction of slides, tables, formatted text, and metadata |
+| **AI & LLM** | Google Gemini (3.6-Flash / 3.8-Flash) | Context-grounded Q&A, executive summaries, multi-key retry |
+| **Speech Engine** | Google Text-to-Speech Engine | Natural pitch, sentence pacing, 50+ language synthesis |
+| **Database** | PostgreSQL (Prod) / H2 (Dev) | Relational persistence for users, documents, and notes |
+| **Auth** | Spring Security 6, JWT, OAuth2 | Cryptographically signed bearer tokens, Google SSO |
 
 ---
 
-## 🚀 Quick Start (Local Setup)
+## 🚀 Getting Started
+
+Follow these steps to run DocVoice locally on your machine.
 
 ### 1. Prerequisites
-- **Java**: 17 or higher
-- **Node.js**: 18 or higher & `npm`
-- **Gemini API Key**: Free key from [Google AI Studio](https://aistudio.google.com/)
+- **Java JDK 17+** installed ([Download](https://www.oracle.com/java/technologies/downloads/))
+- **Node.js 18+** & `npm` installed ([Download](https://nodejs.org/))
+- **Google Gemini API Key** ([Get Free Key](https://aistudio.google.com/))
 
 ---
 
 ### 2. Backend Setup
-1. Navigate to the backend folder:
-   ```bash
-   cd backend
-   ```
-2. Set your environment variables (or configure `application.yml`):
-   ```bash
-   # Windows PowerShell
-   $env:GEMINI_KEY_1="your_gemini_api_key"
-   $env:JWT_SECRET="your_jwt_secret_min_32_characters"
 
-   # Linux / macOS
-   export GEMINI_KEY_1="your_gemini_api_key"
-   export JWT_SECRET="your_jwt_secret_min_32_characters"
-   ```
-3. Run using Maven wrapper:
-   ```bash
-   # Windows
-   .\mvnw spring-boot:run
+```bash
+# Clone the repository
+git clone https://github.com/Amitesh-cyber/docvoice-.git
+cd docvoice-/backend
 
-   # Linux / macOS
-   ./mvnw spring-boot:run
-   ```
-   *The backend starts at `http://localhost:8080`.*
+# Configure local development environment
+# (Keys are securely managed via application-local.yml or environment variables)
+export GEMINI_KEY_1="your_gemini_api_key"
+export JWT_SECRET="your_custom_jwt_secret_key_32_characters"
+
+# Build and run the Spring Boot service
+./mvnw spring-boot:run
+```
+> *The backend server will launch at: `http://localhost:8080`*
 
 ---
 
 ### 3. Frontend Setup
-1. Navigate to the frontend folder:
-   ```bash
-   cd frontend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-   *The client starts at `http://localhost:5173`.*
+
+```bash
+# In a new terminal, navigate to frontend
+cd docvoice-/frontend
+
+# Install dependencies
+npm install
+
+# Start the Vite development server
+npm run dev
+```
+> *Open your browser at: `http://localhost:5173`*
 
 ---
 
-## 🌐 API Reference Overview
+## 📋 API Endpoints Reference
 
-| Method | Endpoint | Description | Auth Required |
-| :--- | :--- | :--- | :---: |
-| `POST` | `/api/auth/register` | Register a new user account | No |
-| `POST` | `/api/auth/login` | Login and obtain JWT bearer token | No |
-| `GET` | `/api/documents` | Retrieve all user documents | Yes |
-| `POST` | `/api/documents/upload` | Upload and process PDF/DOCX/PPTX | Yes |
-| `GET` | `/api/reader/document/{id}/pages`| Fetch parsed document pages | Yes |
-| `POST` | `/api/reader/ask` | Ask AI context-grounded question | Yes |
-| `GET` | `/api/reader/audio` | Stream synthesized audio by paragraph | No |
+### Authentication
+- `POST /api/auth/register` — Create a new DocVoice account
+- `POST /api/auth/login` — Authenticate and receive JWT Bearer token
+- `GET /oauth2/authorize/google` — Authenticate via Google OAuth2
+
+### Document Management
+- `POST /api/documents/upload` — Upload PDF, DOCX, or PPT/PPTX file (Multipart)
+- `GET /api/documents` — Fetch all user uploaded documents
+- `GET /api/documents/{id}` — Fetch document details and page structures
+- `DELETE /api/documents/{id}` — Delete document and stored media
+
+### AI & Reader Controls
+- `GET /api/reader/document/{id}/pages` — Fetch paginated extracted content
+- `POST /api/reader/ask` — Context-grounded Q&A ("Ask AI" panel)
+- `GET /api/reader/audio?lang={code}&text={query}` — Stream audio synthesis
 
 ---
 
-## 🚢 Deploying to Production (Making It Live)
+## 🌐 Production Cloud Deployment
 
-Deploying DocVoice live makes it an impressive, interactive item on your CV:
-
-### Frontend Deployment (Vercel / Netlify - Free)
-1. Push your code to GitHub.
-2. Log into [Vercel](https://vercel.com) and click **Add New Project**.
-3. Import your GitHub repository and set the **Root Directory** to `frontend`.
-4. Add environment variable:
+### 1. Frontend on Vercel (Free)
+1. Fork or import this repo into **[Vercel](https://vercel.com)**.
+2. Select the `frontend` folder as the **Root Directory**.
+3. Add Environment Variable:
    ```env
-   VITE_API_BASE_URL=https://your-backend-service.onrender.com
+   VITE_API_BASE_URL=https://your-backend.onrender.com
    ```
-5. Click **Deploy**.
+4. Click **Deploy**.
 
-### Backend Deployment (Render / Railway / Fly.io - Free/Low Cost)
-1. In [Render](https://render.com), select **New Web Service** and connect your repository.
-2. Set **Root Directory** to `backend`.
-3. Build Command: `./mvnw clean package -DskipTests`
-4. Start Command: `java -jar target/*.jar`
-5. Configure Environment Variables in the Render dashboard:
-   - `GEMINI_KEY_1`: `<your-key>`
-   - `JWT_SECRET`: `<secure-random-string>`
-   - `SPRING_PROFILES_ACTIVE`: `prod`
+### 2. Backend on Render (Free)
+1. Create a **New Web Service** on **[Render](https://render.com)**.
+2. Connect your `Amitesh-cyber/docvoice-` GitHub repository.
+3. Configure settings:
+   - **Root Directory**: `backend`
+   - **Build Command**: `./mvnw clean package -DskipTests`
+   - **Start Command**: `java -jar target/demo-0.0.1-SNAPSHOT.jar`
+4. Add Environment Variables:
+   - `GEMINI_KEY_1`: `<your-gemini-key>`
+   - `GEMINI_KEY_2`: `<your-backup-key>`
+   - `JWT_SECRET`: `<your-32-char-jwt-secret>`
 
 ---
 
-## 💼 CV / Resume Showcase Guide
+## 💼 Resume / CV Showcase Points
 
-When adding this project to your CV, emphasize full-stack architecture, AI integration, and problem solving:
+*Ready to copy-paste directly into your resume under the **Projects** section:*
 
-```markdown
-**DocVoice — Multilingual Document-to-Speech & AI Assistant (Full Stack)**
-- Built a full-stack document intelligence platform supporting PDF, DOCX, and PPTX with Apache POI, PDFBox, and Spring Boot 3.
-- Integrated Google Gemini AI for real-time document summarization and interactive Q&A, designing a resilient multi-model failover mechanism that mitigated API rate limits and 503 outages.
-- Implemented high-performance multilingual text-to-speech audio streaming supporting 50+ languages with synchronized reading highlights.
-- Architected stateless authentication using Spring Security 6, JWT, and OAuth2 SSO with role-based access control.
-- Deployed frontend to Vercel and backend to cloud containers with CI/CD automation via GitHub Actions.
+```text
+DocVoice — Multilingual Document-to-Speech & AI Knowledge Platform
+Tech Stack: Java 17, Spring Boot 3, React 18, Google Gemini AI, PostgreSQL, Tailwind CSS, Docker
+
+• Built an end-to-end full-stack document intelligence platform parsing PDFs, Word documents, and PPT/PPTX slides using Apache POI and PDFBox with recursive shape/table extraction.
+• Implemented Google Gemini (3.6/3.8 Flash) for page-by-page AI summaries and contextual Q&A, designing an automatic multi-model failover engine mitigating 503 high-demand rate limits.
+• Integrated multilingual Text-to-Speech (TTS) audio streaming in 50+ languages with synchronized paragraph tracking and playback speed scrubbing.
+• Secured application using Spring Security 6 with stateless JWT authorization, Google OAuth2 SSO, and role-based access control.
+• Automated CI/CD workflows and deployed the web client to Vercel and containerized REST API to cloud infrastructure.
 ```
 
 ---
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome!
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Contributions are what make the open-source community an incredible place to learn, inspire, and create.
+1. **Fork** the project
+2. **Create** your feature branch (`git checkout -b feature/AmazingFeature`)
+3. **Commit** your changes (`git commit -m 'feat: Add some AmazingFeature'`)
+4. **Push** to the branch (`git push origin feature/AmazingFeature`)
+5. **Open** a Pull Request
 
 ---
 
 ## 📄 License
 
-Distributed under the **MIT License**. See `LICENSE` for more information.
+Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more information.
+
+<div align="center">
+  <sub>Built with ❤️ by <a href="https://github.com/Amitesh-cyber">Amitesh</a></sub>
+</div>
